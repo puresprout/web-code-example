@@ -3,4 +3,47 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <!--
+    <servlet>
+        <servlet-name>dynamicImageServlet</servlet-name>
+        <servlet-class>imageTest.DynamicImageServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>sync</servlet-name>
+        <servlet-class>sync.Sync</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>urlServlet</servlet-name>
+        <servlet-class>url.UrlServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ClassLoading</servlet-name>
+        <servlet-class>dynamicLoading.ClassLoading</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dynamicImageServlet</servlet-name>
+        <url-pattern>/imageTest/dynamicImageServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>sync</servlet-name>
+        <url-pattern>/sync/Sync</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>urlServlet</servlet-name>
+        <url-pattern>/urlServlet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ClassLoading</servlet-name>
+        <url-pattern>/servlet/dynamicLoading.ClassLoading</url-pattern>
+    </servlet-mapping>
+    -->
+
 </web-app>
