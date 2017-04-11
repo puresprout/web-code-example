@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+  <HEAD>
+    <TITLE></TITLE>
+  </HEAD>
+  <BODY>
+    <FORM action='/servlet/sendMail.SendMail' method=post>
+
+    <p>메일 보내기</p>
+    <p>보내는이<br>
+    <input type=text name=mailFrom></p>
+    <p>받는이<br>
+    <input type=text name=mailTo></p>
+    <p>제목<br>
+    <input type=text size=40 name=subject></p>
+    <p>내용<br>
+    <textarea cols=40 rows=8 name=body></textarea></p>
+  
+    <input type=submit value='보내기'><input type=reset value='지우기'>
+
+    </FORM>
+</BODY>
+</HTML>

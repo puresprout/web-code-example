@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>계산기</title>
+<script>
+<!-- 다른 브라우저로부터 숨기기
+
+var total = 0;
+var lastOperation = "+";
+var newNumber = true;
+
+function enterNumber(digit) {
+	var form = document.displayForm;
+	
+	if (newNumber) {
+		clearNumber(form);
+		newNumber = false;
+	}
+	
+	form.display.value = form.display.value + digit.name;
+}
+
+function clearForm(form) {
+	total = 0;
+	lastOperation = "+";
+	clearNumber(form);
+}
+
+function clearNumber(form) {
+	form.display.value = "";
+}
+
+function calculate(operation) {
+	var form = document.displayForm;
+	
+	var expression = total + lastOperation + form.display.value;
+	
+	lastOperation = operation.value;
+	total = eval(expression);
+	form.display.value = total;
+	newNumber = true;
+}
+
+-->
+</script>
+</head>
+<body>
+<table border=1>
+<tr>
+	<td colspan=4>
+	<form name="displayForm">
+		<input type=text name="display" value="0" onFocus="this.blur();">
+	</form>
+	</td>
+</tr>
+<tr>
+	<td><form>
+		<input type=button name="7" value="7" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="8" value="8" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="9" value="9" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="+" value="+" onClick="calculate(this);">
+	</form></td>
+</tr>
+<tr>
+	<td><form>
+		<input type=button name="4" value="4" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="5" value="5" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="6" value="6" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="-" value="-" onClick="calculate(this);">
+	</form></td>
+</tr>
+<tr>
+	<td><form>
+		<input type=button name="1" value="1" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="2" value="2" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="3" value="3" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="*" value="*" onClick="calculate(this);">
+	</form></td>
+</tr>
+<tr>
+	<td><form>
+		<input type=button name="0" value="0" onClick="enterNumber(this);">
+	</form></td>
+	<td><form>
+		<input type=button name="C" value="C" onClick="clearForm(document.displayForm);">
+	</form></td>
+	<td><form>
+		<input type=button name="CE" value="CE" onClick="clearForm(document.displayForm);">
+	</form></td>
+	<td><form>
+		<input type=button name="/" value="/" onClick="calculate(this);">
+	</form></td>
+</tr>

@@ -1,0 +1,68 @@
+일반사항
+
+1. 아이우에오 를 URL 인코딩 하면(UTF-8 캐릭터셋으로 인식하고) %EC%95%84%EC%9D%B4%EC%9A%B0%EC%97%90%EC%98%A4 이다.
+EUC-KR 캐릭터셋으로 인식하고 URL 인코딩하면 %BE%C6%C0%CC%BF%EC%BF%A1%BF%C0
+%EC%95%84%EC%9D%B4%EC%9A%B0%EC%97%90%EC%98%A4 이 문자를 UTF-8 캐릭터셋으로 인식하고 다시 한번 더 URL 인코딩하면 다음과 같다.
+%25EC%2595%2584%25EC%259D%25B4%25EC%259A%25B0%25EC%2597%2590%25EC%2598%25A4
+
+2. formPageUTF8.jsp 는 UTF-8 페이지이다. 브라우저의 인코딩 정보가 UTF-8
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+3. formPageEUCKR.jsp 는 EUC-KR 페이지이다.
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+
+4. urlServlet은 web.xml 파일에 다음과 같이 설정되어 있다.
+	<servlet>
+		<servlet-name>urlServlet</servlet-name>
+		<servlet-class>url.UrlServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>urlServlet</servlet-name>
+		<url-pattern>/urlServlet/*</url-pattern>
+	</servlet-mapping>
+
+
+
+실험
+
+1. post 방식과 UTF-8 페이지
+formPageUTF8.jsp 페이지에서 아이우에오 를 입력하고 post 방식으로 submit 한다.
+브라우저는 http request body를 title=%EC%95%84%EC%9D%B4%EC%9A%B0%EC%97%90%EC%98%A4 로 만들고 서버에 요청한다.
+여기서 브라우저는 아이우에오를 UTF-8 캐릭터셋으로 인식하고 URL 인코딩 한 것이다. 페이지가 UTF-8 형식이었으므로.
+urlDecoding.jsp에서 <% request.setCharacterEncoding("UTF-8"); %> 이 코드를 실행하고 ${param.title} 를 출력하면 아이우에오가 잘 나온다.
+만일   <% request.setCharacterEncoding("UTF-8"); %> 이 코드를 실행하지 않으면 ISO-8859-1 로 인식해서 글자가 깨진다.
+만일   <% request.setCharacterEncoding("EUC-KR"); %> 이 코드를 실행하면 캐릭터 인코딩이 안 맞아서 글자가 깨진다.
+그리고 톰캣 설정 파일 server.xml 에서 <connector> 태그의 URIEncoding 속성과는 아무런 상관이 없다.
+
+2. post 방식과 EUC-KR 페이지
+formPageEUCKR.jsp 페이지에서 아이우에오 를 입력하고 post 방식으로 submit 한다.
+브라우저는 http request body를 title=%BE%C6%C0%CC%BF%EC%BF%A1%BF%C0 로 만들고 서버에 요청한다.
+여기서 브라우저는 아이우에오를 EUC-KR 캐릭터셋으로 인식하고 URL 인코딩 한 것이다. 페이지가 EUC-KR 형식이었으므로.
+urlDecoding.jsp에서 <% request.setCharacterEncoding("EUC-KR"); %> 이 코드를 실행하고 ${param.title} 를 출력하면 아이우에오가 잘 나온다.
+
+3. get 방식
+직접 다음과 같이 요청하면 <% request.setCharacterEncoding("UTF-8"); %> 이 코드가 있건 없던 결과는 깨진다.
+urlDecoding.jsp?title=%EC%95%84%EC%9D%B4%EC%9A%B0%EC%97%90%EC%98%A4
+그 이유는 <% request.setCharacterEncoding("UTF-8"); %> 이 코드는 http request body의 인코딩에만 영향을 끼치기 때문이다.
+톰캣 설정 파일 server.xml 에서 <connector> 태그의 URIEncoding 속성에 UTF-8 값을 주면 괜찮아진다.
+
+4. get 방식
+직접 다음과 같이 요청하면 <% request.setCharacterEncoding("EUC-KR"); %> 이 코드가 있건 없던 결과는 깨진다.
+urlDecoding.jsp?title=%BE%C6%C0%CC%BF%EC%BF%A1%BF%C0
+그 이유는 <% request.setCharacterEncoding("EUC-KR"); %> 이 코드는 http request body의 인코딩에만 영향을 끼치기 때문이다.
+톰캣 설정 파일 server.xml 에서 <connector> 태그의 URIEncoding 속성에 EUC-KR 값을 주면 괜찮아진다.
+
+주의할 점은 이클립스에서 톰캣을 쓸 때 server.xml 파일을 변경한 것이 제대로 반영이 안 될 때가 있다. 변경후 clean 이나 publish 를 해 주는게 좋다.
+
+5. 쿼리스트링 부분이 아닌 url 부분에서의 인코딩
+URIEncoding은 쿼리스트링의 파라미터값뿐만 아니라 url 전체에 해당하는 범위이다.
+URIEncoding의 값이 UTF-8이고 다음과 같이 요청하면
+http://localhost:8081/webTest/urlServlet/%EC%95%84%EC%9D%B4%EC%9A%B0%EC%97%90%EC%98%A4
+url.UrlServlet 클래스에서 System.out.println(request.getPathInfo()); 메소드를 호출하면 /아이우에오 가 정상적으로 나온다. 
+
+URIEncoding의 값이 EUC-KR이고 다음과 같이 요청하면
+http://localhost:8081/webTest/urlServlet/%BE%C6%C0%CC%BF%EC%BF%A1%BF%C0
+url.UrlServlet 클래스에서 System.out.println(request.getPathInfo()); 메소드를 호출하면 /아이우에오 가 정상적으로 나온다.
+
+6. jkconnect 관련
+JkOptions +ForwardURICompatUnparsed

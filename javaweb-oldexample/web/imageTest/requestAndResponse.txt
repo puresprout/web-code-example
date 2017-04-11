@@ -1,0 +1,111 @@
+/*
+ * 1. Ã¹ ¿äÃ»
+ */
+GET /webTest/imageTest/dynamicImageTest.jsp HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+Accept-Language: ko,en-US;q=0.5
+UA-CPU: x86
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727; InfoPath.2)
+Host: localhost:8080
+Connection: Keep-Alive
+Cookie: JSESSIONID=229C8DABDB6D6EEA43AC83571DC12A71
+
+
+
+/*
+ * 2. Ã¹ ¿äÃ»¿¡ ´ëÇÑ ÀÀ´ä
+ */
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: text/html;charset=EUC-KR
+Content-Length: 304
+Date: Fri, 03 Aug 2007 04:31:55 GMT
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form><input type="text" name="name"> <input
+	type="submit"></form>
+
+
+
+</body>
+</html>
+
+
+
+/*
+ * 3. µÎ¹øÂ° ¿äÃ» (ÀÌ¸§À» ÀÔ·ÂÇÏ°í Àü¼Û)
+GET /webTest/imageTest/dynamicImageTest.jsp?name=Park+Sung+Hyun HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+Referer: http://localhost:9090/webTest/imageTest/dynamicImageTest.jsp
+Accept-Language: ko,en-US;q=0.5
+UA-CPU: x86
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727; InfoPath.2)
+Host: localhost:8080
+Connection: Keep-Alive
+Cookie: JSESSIONID=229C8DABDB6D6EEA43AC83571DC12A71
+
+
+
+/*
+ * 4. µÎ¹øÂ° ¿äÃ»¿¡ ´ëÇÑ ÀÀ´ä
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: text/html;charset=EUC-KR
+Content-Length: 382
+Date: Fri, 03 Aug 2007 04:33:40 GMT
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form><input type="text" name="name"> <input
+	type="submit"></form>
+
+
+	<img
+		src='/webTest/imageTest/dynamicImageServlet?name=Park Sung Hyun'>
+
+
+</body>
+</html>
+
+
+
+/*
+ * ¼¼¹øÂ° ¿äÃ» (µÎ¹øÂ° ÀÀ´ä¿¡¼­ ºê¶ó¿ìÀú°¡ img ÅÂ±×¸¦ ¸¸³ª È­¸é¿¡ ÀÌ¹ÌÁö¸¦ º¸¿©ÁÖ±â À§ÇØ ÇÑ¹ø ´õ ¿äÃ»)
+ */
+GET /webTest/imageTest/dynamicImageServlet?name=Park%20Sung%20Hyun HTTP/1.1
+Accept: */*
+Referer: http://localhost:9090/webTest/imageTest/dynamicImageTest.jsp?name=Park+Sung+Hyun
+Accept-Language: ko,en-US;q=0.5
+UA-CPU: x86
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727; InfoPath.2)
+Host: localhost:8080
+Connection: Keep-Alive
+Cookie: JSESSIONID=229C8DABDB6D6EEA43AC83571DC12A71
+
+
+
+/*
+ * ¼¼¹øÂ° ¿äÃ»¿¡ ´ëÇÑ ÀÀ´ä
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: image/gif
+Transfer-Encoding: chunked
+Date: Fri, 03 Aug 2007 04:33:40 GMT
+
+GIF89add???dd@?H° Áƒ*\È°¡ÂH‘bE?3RÜ¨‘àE;‚Ü8²¤Ã“(S?É²¥Ë?c?I³¦?8sêÜÉ³§Ï??J´¨Ñ£Hy??àÒ??½ù´¡Ô©X³jÝÊµ«×¯`ÃŠK¶¬Ù³h?tj?Ä·M£ÂùÖ©Ä?-Â½K·ï?qI>?¸ðÈ¿??)?_??žL¹²åË?kÞÌ¹³çÏ C?Mº´éÓ¨S?ýòn??º†?Ðª?™øöãŽµMz?±l??wØ¸âÜ?K??cÞ±?×ÞW??ms8O?øÝ\q¯eÍ¾½û÷ðãËŸO¿¾ýûøóëßÏ¿??(?h?&¨à?6èà?;
